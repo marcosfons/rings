@@ -22,14 +22,20 @@ class HasuraClient {
 		}
 	}
 
-	Future<Map<String, dynamic>> mutation(String doc, {Map<String, dynamic>? variables}) async {
-		final result = await _hasuraConnect.mutation(doc, variables: variables);
-		return result['data'] as Map<String, dynamic>;
+	Future<Either<Failure, Map<String, dynamic>>> mutation(
+		String doc, 
+		{Map<String, dynamic>? variables}
+	) async {
+		try {
+			final result = await _hasuraConnect.mutation(doc, variables: variables);
+			return right(result['data']);
+		} catch(e) {
+			return left(UnknownFailure());
+		}
 	}
 
 	Future<Snapshot<dynamic>> subscribe(String doc, {Map<String, dynamic>? variables}) async {
-		final result = await _hasuraConnect.subscription(doc, variables: variables);
-		return result;
+		return _hasuraConnect.subscription(doc, variables: variables);
 	}
 
 }
