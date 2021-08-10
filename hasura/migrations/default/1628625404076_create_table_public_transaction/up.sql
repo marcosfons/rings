@@ -1,0 +1,1 @@
+CREATE TABLE "public"."transaction" ("id" serial NOT NULL, "value" integer NOT NULL, "receipt" text, "created_at" timestamptz NOT NULL DEFAULT now(), "type" text NOT NULL, "boleto_number" text, "account_id" integer NOT NULL, "favored_account_id" integer, PRIMARY KEY ("id") );

@@ -1,0 +1,13 @@
+table:
+  name: transaction
+  schema: public
+object_relationships:
+- name: account
+  using:
+    foreign_key_constraint_on: account_id
+- name: accountByFavoredAccountId
+  using:
+    foreign_key_constraint_on: favored_account_id
+- name: transaction_type
+  using:
+    foreign_key_constraint_on: type

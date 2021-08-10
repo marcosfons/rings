@@ -1,0 +1,1 @@
+CREATE TABLE "public"."service" ("id" serial NOT NULL, "name" text NOT NULL, "tax" integer NOT NULL, "hired_at" timestamptz NOT NULL, "canceled_at" timestamptz, "value" integer, "due_at" timestamptz, "insurance" text, "type" text NOT NULL, "account_id" integer NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , UNIQUE ("id"));
