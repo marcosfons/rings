@@ -1,1 +1,3 @@
 - "!include public_client.yaml"
+- "!include public_employee.yaml"
+- "!include public_operation.yaml"
