@@ -25,6 +25,9 @@ class HomeScreen extends StatelessWidget {
 						},
 					);
 				}
+				if (controller.hasError) {
+					return Center(child: Text(controller.error.toString()),);
+				}
 				return Center(child: CircularProgressIndicator(),);
 			})
 		);
