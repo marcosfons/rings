@@ -1,0 +1,7 @@
+version: 3
+endpoint: https://rings-tp.herokuapp.com
+admin_secret: VTwkuCbp66FnsjX2a3TynGH88EctGVRN
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: http://localhost:3000
