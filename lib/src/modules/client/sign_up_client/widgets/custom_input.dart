@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class NoGlowEffect extends ScrollBehavior {
   @override
@@ -10,11 +11,18 @@ class NoGlowEffect extends ScrollBehavior {
 
 class CustomInput extends StatelessWidget {
   final String label;
-  final IconData icon;
+  final IconData? icon;
   final String? hintText;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboardType;
 
   const CustomInput(
-      {Key? key, required this.label, required this.icon, this.hintText})
+      {Key? key,
+      required this.label,
+      this.icon,
+      this.hintText,
+      this.inputFormatters,
+      this.keyboardType})
       : super(key: key);
 
   @override
@@ -33,8 +41,10 @@ class CustomInput extends StatelessWidget {
           ),
         ),
         TextField(
+          keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
           decoration: InputDecoration(
-            hintText: label,
+            hintText: hintText,
             suffixIcon: Icon(icon),
           ),
         ),
