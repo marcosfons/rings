@@ -49,29 +49,29 @@ class HireServiceScreen extends StatelessWidget {
           const Divider(height: 0),
           ScrollConfiguration(
             behavior: NoGlowEffect(),
-            child: ListView.separated(
-              shrinkWrap: true,
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(height: 0),
-              itemCount: ServiceType.values.length,
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  child: Container(
-                    padding:
-                        const EdgeInsets.all(18),
-                    child: Row(
-                      children: [
-                        Expanded(child: Text(ServiceType.values[index].name)),
-                        Icon(Icons.check),
-                      ],
+            child: Expanded(
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const Divider(height: 0),
+                itemCount: ServiceType.values.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == ServiceType.values.length) return SizedBox();
+
+                  return InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.all(18),
+                      child: Row(
+                        children: [
+                          Expanded(child: Text(ServiceType.values[index].name)),
+                          Icon(Icons.check),
+                        ],
+                      ),
                     ),
-                  ),
-                  onTap: () {},
-                );
-              },
+                    onTap: () {},
+                  );
+                },
+              ),
             ),
           ),
-          const Divider(height: 0),
         ],
       ),
     );
