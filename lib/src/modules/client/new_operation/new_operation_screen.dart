@@ -1,30 +1,73 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rings/src/modules/client/new_operation/new_operation_controller.dart';
+import 'package:rings/src/modules/client/select_client/widgets/new_operation_button.dart';
 
 class NewOperationScreen extends StatelessWidget {
-	const NewOperationScreen({ Key? key }) : super(key: key);
+  const NewOperationScreen({Key? key}) : super(key: key);
 
-	@override
-	Widget build(BuildContext context) {
-		final controller = Get.find<NewOperationController>();
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.find<NewOperationController>();
 
-		return Scaffold(
-			appBar: AppBar(
-				foregroundColor: Colors.red,
-				title: Text(
-					'Nova operação',
-					style: TextStyle(
-						color: Colors.black,
-						fontWeight: FontWeight.bold
-					),
-				),
-			),
-			body: Column(
-				children: [
-					Text(controller.client.name)
-				],
-			),
-		);
-	}
+    return Scaffold(
+      appBar: AppBar(
+        foregroundColor: Colors.red,
+        title: Text(
+          'Nova operação',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: Column(
+        children: [
+          Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.fromLTRB(6, 6, 0, 0),
+              child: Text(
+                "Cliente:",
+                style: TextStyle(
+                    color: Color(0xFF858585),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600),
+              )),
+          Container(
+            alignment: Alignment.topLeft,
+            padding: EdgeInsets.fromLTRB(6, 0, 10, 6),
+            child: Text(
+              controller.client.name,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          NewOperationButton(
+              text: "Vizualizar dados",
+              icon: Icons.remove_red_eye,
+              onTap: () {
+                print('click vizualizar dados');
+              }),
+          NewOperationButton(
+              text: "Atualizar dados",
+              icon: Icons.edit,
+              onTap: () {
+                print('click Atualizar dados');
+              }),
+          NewOperationButton(
+              text: "Fazer Transação",
+              icon: Icons.attach_money,
+              onTap: () {
+                print('click Fazer transação');
+              }),
+          NewOperationButton(
+              text: "Contratar serviço",
+              icon: Icons.work,
+              onTap: () {
+                print('click Contratar serviço');
+              }),
+        ],
+      ),
+    );
+  }
 }
