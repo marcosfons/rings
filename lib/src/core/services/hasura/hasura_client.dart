@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:rings/src/core/failures/failure.dart';
 import 'package:rings/src/core/failures/unknown_failure.dart';
+import 'package:rings/src/core/services/hasura/failures/invalid_query.dart';
 
 class HasuraClient {
 
@@ -17,8 +18,12 @@ class HasuraClient {
 		try {
 			final result = await _hasuraConnect.query(doc, variables: variables);
 			return right(result['data']);
+		} on InvalidRequestError catch(e) {
+			if (e.message == 'Invalid document') 
+				return left(const InvalidQueryFailure());
+			return left(const UnknownFailure());
 		} catch(e) {
-			return left(UnknownFailure());
+			return left(const UnknownFailure());
 		}
 	}
 

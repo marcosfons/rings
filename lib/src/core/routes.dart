@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:rings/src/core/services/hasura/hasura_client.dart';
 import 'package:rings/src/modules/auth/sign_in/sign_in_screen.dart';
 import 'package:rings/src/modules/client/new_operation/new_operation_controller.dart';
 import 'package:rings/src/modules/client/new_operation/new_operation_screen.dart';
@@ -25,6 +26,7 @@ abstract class Routes {
 			name: '/select_client', 
 			page: () => SelectClientScreen(),
 			binding: BindingsBuilder(() {
+				Get.lazyPut(() => HasuraClient());
 				Get.lazyPut(() => SelectClientController());
 			})
 		),
