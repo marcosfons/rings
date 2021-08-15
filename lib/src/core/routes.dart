@@ -4,11 +4,11 @@ import 'package:rings/src/modules/client/new_operation/new_operation_controller.
 import 'package:rings/src/modules/client/new_operation/new_operation_screen.dart';
 import 'package:rings/src/modules/client/select_client/select_client_controller.dart';
 import 'package:rings/src/modules/client/select_client/select_client_screen.dart';
+import 'package:rings/src/modules/client/sign_up_client/sign_up_client_screen.dart';
 import 'package:rings/src/modules/home/home_controller.dart';
 import 'package:rings/src/modules/home/home_screen.dart';
 
 abstract class Routes {
-
 	static final List<GetPage> pages = [
 		GetPage(
 			name: '/', 
@@ -35,6 +35,10 @@ abstract class Routes {
 				Get.lazyPut(() => NewOperationController(Get.arguments));
 			})
 		),
+    GetPage(
+      name: '/sign_up_client',
+      page: () => SignUpClientScreen(),
+    ),
+    
 	];
-
 }
