@@ -1,6 +1,36 @@
-actions: []
+actions:
+- name: signin
+  definition:
+    kind: ""
+    handler: '{{API_URL}}/signin'
+- name: signup
+  definition:
+    kind: synchronous
+    handler: '{{API_URL}}/signup'
 custom_types:
   enums: []
-  input_objects: []
-  objects: []
+  input_objects:
+  - name: SignupInput
+  - name: SigninInput
+  objects:
+  - name: SignupOutput
+    relationships:
+    - remote_table:
+        schema: public
+        name: employee
+      name: employee
+      source: default
+      type: object
+      field_mapping:
+        employee_id: id
+  - name: SigninOutput
+    relationships:
+    - remote_table:
+        schema: public
+        name: employee
+      name: employee
+      source: default
+      type: object
+      field_mapping:
+        employee_id: id
   scalars: []

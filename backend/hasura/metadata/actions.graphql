@@ -1,0 +1,38 @@
+type Query {
+  signin (
+    email: String!
+    password: String!
+  ): SigninOutput!
+}
+
+type Mutation {
+  signup (
+    email: String!
+    password: String!
+    name: String!
+    image: String!
+  ): SignupOutput
+}
+
+input SignupInput {
+  email : String!
+  password : String!
+  name : String!
+  image : String!
+}
+
+input SigninInput {
+  email : String!
+  password : String!
+}
+
+type SignupOutput {
+  token : String!
+  employee_id : Int!
+}
+
+type SigninOutput {
+  token : String!
+  employee_id : Int!
+}
+

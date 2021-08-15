@@ -1,4 +1,5 @@
-version: '3.6'
+version: '3.8'
+
 services:
   postgres:
     image: postgres:12
@@ -14,9 +15,11 @@ services:
     depends_on:
     - "postgres"
     restart: always
+    external_links:
+      - hasura_node_auth:node_auth
     volumes:
-      - ./migrations:/hasura-migrations
-      - ./metadata:/hasura-metadata
+      - ./hasura/migrations:/hasura-migrations
+      - ./hasura/metadata:/hasura-metadata
     environment:
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
@@ -25,7 +28,25 @@ services:
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ADMIN_SECRET: QYje56evpvZJgYU9vqu8wMbRaZMRR9UH
-      API_URL: http://192.168.0.100:8000
+      API_URL: http://node_auth:8000
+
+
+  hasura_node_auth:
+    build:
+      context: node
+    depends_on:
+    - "graphql-engine"
+    ports:
+      - 8000:8000
+    restart: always
+    external_links:
+      - graphql-engine:hasura
+    environment:
+      SERVER_PORT: 8000
+      JWT_SECRET: Tj2srXEL67sN9CNAsga5XcU99GHA55VV
+      HASURA_GRAPHQL_URL: http://hasura:8080/v1/graphql
+      HASURA_ADMIN_SECRET: QYje56evpvZJgYU9vqu8wMbRaZMRR9UH
+    command: npm start
 
 volumes:
   db_data:

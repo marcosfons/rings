@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  hasura-node-auth:
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    restart: always
+    environment:
+      SERVER_PORT: 8000
+      JWT_SECRET: Tj2srXEL67sN9CNAsga5XcU99GHA55VV
+      HASURA_GRAPHQL_URL: http://192.168.0.100:8080/v1/graphql
+      HASURA_ADMIN_SECRET: QYje56evpvZJgYU9vqu8wMbRaZMRR9UH
+    command: npm start
