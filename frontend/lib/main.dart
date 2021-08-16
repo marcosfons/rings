@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rings/src/core/routes.dart';
+import 'package:rings/src/core/routes/routes.dart';
 import 'package:rings/src/core/themes/light_theme.dart';
 
 void main() {

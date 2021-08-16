@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rings/src/core/controllers/auth_controller.dart';
 import 'package:rings/src/modules/home/home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,11 +8,34 @@ class HomeScreen extends StatelessWidget {
 	
 	@override
 	Widget build(BuildContext context) {
+		final authController = Get.find<AuthController>();
 		final controller = Get.find<HomeController>();
 
 		return Scaffold(
 			appBar: AppBar(
-				title: Text('HomeScreen'),
+				centerTitle: false,
+				title: Column(
+					mainAxisSize: MainAxisSize.min,
+					crossAxisAlignment: CrossAxisAlignment.start,
+					children: [
+						Text(
+							authController.employee.name,
+							style: TextStyle(
+								fontSize: 20,
+								color: Colors.black,
+								fontWeight: FontWeight.w600
+							),
+						),
+						Text(
+							'Funcionário',
+							style: TextStyle(
+								fontSize: 14,
+								fontWeight: FontWeight.bold,
+								color: Colors.grey
+							),
+						)
+					],
+				),
 			),
 			body: Obx(() {
 				if (controller.hasData) {

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:rings/src/core/routes/middlewares/signed_in_middleware.dart';
 import 'package:rings/src/core/services/hasura/hasura_client.dart';
+import 'package:rings/src/modules/auth/sign_in/sign_in_controller.dart';
 import 'package:rings/src/modules/auth/sign_in/sign_in_screen.dart';
 import 'package:rings/src/modules/client/new_operation/new_operation_controller.dart';
 import 'package:rings/src/modules/client/new_operation/new_operation_screen.dart';
@@ -13,11 +15,16 @@ abstract class Routes {
 	static final List<GetPage> pages = [
 		GetPage(
 			name: '/', 
-			page: () => SignInScreen()
+			page: () => SignInScreen(),
+			binding: BindingsBuilder(() {
+				Get.lazyPut(() => HasuraClient());
+				Get.lazyPut(() => SignInController());
+			})
 		),
 		GetPage(
 			name: '/home', 
 			page: () => HomeScreen(),
+			middlewares: [ SignedInMiddleware() ],
 			binding: BindingsBuilder(() {
 				Get.lazyPut(() => HomeController());
 			})
