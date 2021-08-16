@@ -1,3 +1,5 @@
+import 'package:rings/src/core/models/account.dart';
+
 class Client {
 
 	late final int id;
@@ -13,6 +15,7 @@ class Client {
 	late String? profitReceiptImage;
 	late DateTime updatedAt;
 	late DateTime createdAt;
+	late List<Account> accounts;
 
 	Client.fromJson(Map json) {
 		id = json['id'];
@@ -28,6 +31,10 @@ class Client {
 		profitReceiptImage = json['profit_receipt_image'];
 		updatedAt = DateTime.parse(json['updated_at']).toLocal();
 		createdAt = DateTime.parse(json['created_at']).toLocal();
+
+		accounts = (json['accounts'] as List)
+			.map((accountJson) => Account.fromJson(accountJson))
+			.toList();
 	}
 
 }

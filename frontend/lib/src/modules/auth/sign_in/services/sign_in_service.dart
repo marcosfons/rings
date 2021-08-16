@@ -1,5 +1,3 @@
-
-
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 import 'package:rings/src/core/failures/failure.dart';
@@ -51,6 +49,14 @@ class SignInService {
 				name
 				password
 				updated_at
+				agency {
+					city
+					created_at
+					id
+					name
+					number
+					state
+				}
 			}
 		}
 	}

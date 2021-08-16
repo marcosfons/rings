@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rings/src/modules/client/hire_service/hire_service_controller.dart';
-import 'package:rings/src/modules/client/models/service.dart';
 import 'package:rings/src/modules/client/sign_up_client/widgets/custom_input.dart';
+import 'package:rings/src/core/models/service_type.dart';
 
 class HireServiceScreen extends StatelessWidget {
   const HireServiceScreen({Key? key}) : super(key: key);
@@ -17,6 +17,22 @@ class HireServiceScreen extends StatelessWidget {
           'Contratar Serviço',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
+				actions: [
+					Obx(() {
+						if (controller.isLoading)
+							return Padding(
+							  padding: const EdgeInsets.only(right: 12),
+							  child: const Center(
+							  	child: SizedBox(
+							  		width: 18,
+							  		height: 18,
+							  		child: CircularProgressIndicator(strokeWidth: 1,)
+							  	),
+							  ),
+							);
+						return const SizedBox();
+					})
+				],
       ),
       body: Column(
         children: [
@@ -41,35 +57,51 @@ class HireServiceScreen extends StatelessWidget {
                 hintText: 'Nome do serviço',
                 suffixIcon: Icon(Icons.search),
               ),
-              onChanged: (value) {
-                print(value);
-              },
+              onChanged: controller.search,
             ),
           ),
+					Obx(() {
+						if (controller.hasError) {
+							return Padding(
+							  padding: const EdgeInsets.only(bottom: 12),
+							  child: Text(controller.error!),
+							);
+						}
+						return const SizedBox();
+					}),
           const Divider(height: 0),
           ScrollConfiguration(
             behavior: NoGlowEffect(),
             child: Expanded(
-              child: ListView.separated(
+              child: Obx(() => ListView.separated(
                 separatorBuilder: (context, index) => const Divider(height: 0),
-                itemCount: ServiceType.values.length + 1,
+                itemCount: controller.filteredServices.length + 1,
                 itemBuilder: (context, index) {
-                  if (index == ServiceType.values.length) return SizedBox();
+                  if (index == controller.filteredServices.length) return SizedBox();
+									final currentService = controller.filteredServices[index];
+									final isHired = controller.serviceIsHired(currentService);
 
                   return InkWell(
                     child: Container(
                       padding: const EdgeInsets.all(18),
                       child: Row(
                         children: [
-                          Expanded(child: Text(ServiceType.values[index].name)),
-                          Icon(Icons.check),
+                          Expanded(child: Text(currentService.name)),
+                          if (isHired)
+														Icon(Icons.check),
                         ],
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+											if (isHired) {
+												controller.unhireService(currentService);
+											} else {
+												controller.hireService(currentService);
+											}
+										}
                   );
                 },
-              ),
+              )),
             ),
           ),
         ],

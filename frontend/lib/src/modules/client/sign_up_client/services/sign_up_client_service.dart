@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
+import 'package:rings/src/core/controllers/auth_controller.dart';
 import 'package:rings/src/core/failures/failure.dart';
 import 'package:rings/src/core/failures/unknown_failure.dart';
 import 'package:rings/src/core/models/client.dart';
@@ -12,6 +15,7 @@ class SignUpClientService {
 
 	Future<Either<Failure, Client>> createClient(List<Field> fields) async {
 		try {
+			final agencyId = Get.find<AuthController>().employee.agency.id;
 			final clientFields = Map.fromIterable(
 				fields,
 				key: (field) => field.fieldName,
@@ -22,12 +26,23 @@ class SignUpClientService {
 					return field.value;
 				}
 			);
-			
+
+			final random = Random();
+			final numbers = List.generate(7, (_) => random.nextInt(10));
+			final number = numbers.join('');
+
+			final account = {
+				'agency_id': agencyId,
+				'number': number,
+				'type': 'checking'
+			};
+
 			final result = await _hasuraClient.mutation(
 				_insertUser,
 				variables: {'client': clientFields..addAll({
 					'address_receipt_image': '',
-					'profit_receipt_image': ''
+					'profit_receipt_image': '',
+					'accounts': { 'data': account }
 				}) }
 			);
 
@@ -36,6 +51,7 @@ class SignUpClientService {
 				(data) => right(Client.fromJson(data['insert_client_one']))
 			);
 		} catch(e) {
+			print(e.toString());
 			return left(UnknownFailure());
 		}
 	}
@@ -56,6 +72,37 @@ class SignUpClientService {
 			phone
 			profit_receipt_image
 			updated_at
+			accounts {
+				services(where: {canceled_at: {_is_null: true}}) {
+					account_id
+					canceled_at
+					created_at
+					due_at
+					hired_at
+					id
+					insurance
+					name
+					tax
+					type
+					value
+				}
+				updated_at
+				type
+				number
+				id
+				created_at
+				client_id
+				balance
+				agency_id
+				agency {
+					city
+					created_at
+					id
+					name
+					number
+					state
+				}
+			}
 		}
 	}
 	''';

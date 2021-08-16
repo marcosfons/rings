@@ -55,7 +55,7 @@ abstract class Routes {
 			})
     ),
     GetPage(
-        name: '/hire_service/:clientId',
+        name: '/new_operation/:clientId/hire_service',
         page: () => HireServiceScreen(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => HireServiceController(Get.arguments));

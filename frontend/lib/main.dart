@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
 			themeMode: ThemeMode.light,
 			initialRoute: '/sign_in',
 			getPages: Routes.pages,
+			debugShowCheckedModeBanner: false,
 			initialBinding: BindingsBuilder.put(
 				() => HasuraClient(), 
 				permanent: true

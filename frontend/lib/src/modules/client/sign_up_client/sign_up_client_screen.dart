@@ -20,8 +20,8 @@ class SignUpClientScreen extends StatelessWidget {
 			Field('Apelido', 'nickname'),
 			Field('E-mail', 'email'),
 			Field('Telefone', 'phone', mask: '\\+99 (99) 99999-9999', isNumeric: true),
-			Field('Profissão', 'occupation', mask: '\\+99 (99) 99999-9999', isNumeric: true),
-			Field('Endereço', 'address', mask: '\\+99 (99) 99999-9999', isNumeric: true),
+			Field('Profissão', 'occupation'),
+			Field('Endereço', 'address'),
 		];
 		
 		//  {
@@ -56,7 +56,7 @@ class SignUpClientScreen extends StatelessWidget {
                   return CustomInput(
                     label: fields[index].name,
                     hintText: fields[index].name,
-										onChanged: (text) { 
+										onChanged: (text) {
 											fields[index].value = text;
 										},
                     icon: Icons.edit,

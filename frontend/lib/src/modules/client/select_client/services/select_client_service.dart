@@ -35,19 +35,50 @@ class SelectClientService {
 	static const String _queryClients = r'''
 	query {
 		client {
+			address
+			address_receipt_image
+			cpf
+			cnpj
+			created_at
+			email
 			id
 			name
 			nickname
-			cpf
-			cnpj
-			email
-			address
 			occupation
 			phone
-			address_receipt_image
 			profit_receipt_image
 			updated_at
-			created_at
+			accounts {
+				services(where: {canceled_at: {_is_null: true}}) {
+					account_id
+					canceled_at
+					created_at
+					due_at
+					hired_at
+					id
+					insurance
+					name
+					tax
+					type
+					value
+				}
+				updated_at
+				type
+				number
+				id
+				created_at
+				client_id
+				balance
+				agency_id
+				agency {
+					city
+					created_at
+					id
+					name
+					number
+					state
+				}
+			}
 		}
 	}
 	''';

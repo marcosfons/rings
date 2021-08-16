@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rings/src/core/models/client.dart';
 import 'package:rings/src/modules/client/new_operation/new_operation_controller.dart';
 import 'package:rings/src/modules/client/select_client/widgets/new_operation_button.dart';
 
@@ -63,7 +64,10 @@ class NewOperationScreen extends StatelessWidget {
               text: "Contratar serviço",
               icon: Icons.work,
               onTap: () {
-                print('click Contratar serviço');
+								Get.toNamed(
+									'/new_operation/${(Get.arguments as Client).id}/hire_service',
+									arguments: Get.arguments
+								);
               }),
         ],
       ),
