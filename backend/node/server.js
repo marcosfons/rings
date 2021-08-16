@@ -1,11 +1,15 @@
+'use strict';
+
 const { GraphQLClient } = require('graphql-request')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const express = require('express')
-const bodyParser = require('body-parser')
+const fs = require('fs')
  
 const app = express()
-app.use(bodyParser.json())
+app.use(express.json())
+
+const privateKey = fs.readFileSync('./.private.key', 'utf-8');
 
 const graphql = new GraphQLClient(process.env.HASURA_GRAPHQL_URL, {
   headers: { 'X-Hasura-Admin-Secret': process.env.HASURA_ADMIN_SECRET }
@@ -24,15 +28,19 @@ mutation($employee: employee_insert_input!) {
 `
 
 const signEmployeeToken = function(employee) {
+	const signOptions = {
+		issuer: 'rings',
+		expiresIn: '1h',
+		algorithm: 'RS256'
+	};
 	const token = jwt.sign({
 		employeeId: employee.id,
 		'https://hasura.io/jwt/claims': {
-			'x-hasura-user-id': employee.id,
+			'x-hasura-user-id': employee.id.toString(),
 			'x-hasura-default-role': 'employee',
 			'x-hasura-allowed-roles': ['employee']
 		}
-	}, process.env.JWT_SECRET);
-
+	}, privateKey, signOptions);
 	return token
 }
 
@@ -56,9 +64,7 @@ app.post('/signin', async (req, res) => {
 				employee_id: employee.id
 			})
 		} else {
-			return res.status(400).json({
-				message: "Invalid password"
-			});
+			return res.status(400).json({ message: "Invalid password" });
 		}
 	} catch(e) {
 		return res.status(400).json({ message: "An error happened", ea: e.toString() });

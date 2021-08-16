@@ -9,3 +9,29 @@ array_relationships:
       table:
         name: operation
         schema: public
+select_permissions:
+- permission:
+    columns:
+    - created_at
+    - email
+    - id
+    - image
+    - name
+    - password
+    - updated_at
+    filter: {}
+  role: anonymous
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - email
+    - image
+    - name
+    - password
+    - created_at
+    - updated_at
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: employee

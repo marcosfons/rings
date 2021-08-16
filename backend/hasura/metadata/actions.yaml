@@ -3,6 +3,8 @@ actions:
   definition:
     kind: ""
     handler: '{{API_URL}}/signin'
+  permissions:
+  - role: anonymous
 - name: signup
   definition:
     kind: synchronous
