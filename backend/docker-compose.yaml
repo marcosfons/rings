@@ -34,7 +34,7 @@ services:
     external_links:
       - graphql-engine:hasura
     environment:
-      SERVER_PORT: 8000
+      PORT: 8000
       JWT_SECRET: Tj2srXEL67sN9CNAsga5XcU99GHA55VV
       HASURA_GRAPHQL_URL: http://hasura:8080/v1/graphql
       HASURA_ADMIN_SECRET: QYje56evpvZJgYU9vqu8wMbRaZMRR9UH

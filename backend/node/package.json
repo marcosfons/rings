@@ -18,5 +18,10 @@
     "graphql": "^15.5.1",
     "graphql-request": "^3.5.0",
     "jsonwebtoken": "^8.5.1"
+  },
+  "author": "CarlosMito, marcosfons, vitorsvl",
+  "license": "MIT",
+  "engines": {
+    "node": "14.x"
   }
 }

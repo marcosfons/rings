@@ -4,6 +4,7 @@ actions:
     kind: ""
     handler: '{{API_URL}}/signin'
   permissions:
+  - role: employee
   - role: anonymous
 - name: signup
   definition:

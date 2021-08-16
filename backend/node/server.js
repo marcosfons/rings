@@ -95,4 +95,4 @@ app.post('/signup', async (req, res) => {
 	}
 });
 
-app.listen(process.env.SERVER_PORT ?? 8000);
+app.listen(process.env.PORT ?? 8000);
