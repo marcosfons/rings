@@ -6,7 +6,7 @@ class CancelConfirmBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Row(
         children: [
           Expanded(
@@ -20,7 +20,7 @@ class CancelConfirmBox extends StatelessWidget {
                 ),
               ),
               onPressed: () {},
-              child: Text("Cancelar"),
+              child: Text("Cancelar", style: TextStyle(fontSize: 16)),
             ),
           ),
           const SizedBox(width: 10),
@@ -33,7 +33,7 @@ class CancelConfirmBox extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0)),
               ),
               onPressed: () {},
-              child: Text("Confirmar"),
+              child: Text("Confirmar", style: TextStyle(fontSize: 16)),
             ),
           )
         ],

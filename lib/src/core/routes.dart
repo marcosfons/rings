@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:rings/src/modules/auth/sign_in/sign_in_screen.dart';
 import 'package:rings/src/modules/client/hire_service/hire_service_controller.dart';
 import 'package:rings/src/modules/client/hire_service/hire_service_screen.dart';
+import 'package:rings/src/modules/client/make_transaction/make_transaction_controller.dart';
+import 'package:rings/src/modules/client/make_transaction/make_transaction_screen.dart';
 import 'package:rings/src/modules/client/new_operation/new_operation_controller.dart';
 import 'package:rings/src/modules/client/new_operation/new_operation_screen.dart';
 import 'package:rings/src/modules/client/select_client/select_client_controller.dart';
@@ -41,5 +43,11 @@ abstract class Routes {
         binding: BindingsBuilder(() {
           Get.lazyPut(() => HireServiceController(Get.arguments));
         })),
+    GetPage(
+      name: '/make_transaction/:clientId',
+      page: () => MakeTransactionScreen(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => MakeTransactionController(Get.arguments));
+      })),
   ];
 }
