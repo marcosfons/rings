@@ -12,6 +12,8 @@ import 'package:rings/src/modules/client/select_client/select_client_controller.
 import 'package:rings/src/modules/client/select_client/select_client_screen.dart';
 import 'package:rings/src/modules/client/sign_up_client/sign_up_client_controller.dart';
 import 'package:rings/src/modules/client/sign_up_client/sign_up_client_screen.dart';
+import 'package:rings/src/modules/client/view_data/view_data_controller.dart';
+import 'package:rings/src/modules/client/view_data/view_data_screen.dart';
 import 'package:rings/src/modules/home/home_controller.dart';
 import 'package:rings/src/modules/home/home_screen.dart';
 
@@ -45,7 +47,21 @@ abstract class Routes {
 			page: () => NewOperationScreen(),
 			binding: BindingsBuilder(() {
 				Get.lazyPut(() => NewOperationController(Get.arguments));
-			})
+			}),
+			children: [
+				GetPage(
+						name: '/hire_service',
+						page: () => HireServiceScreen(),
+						binding: BindingsBuilder(() {
+							Get.lazyPut(() => HireServiceController(Get.arguments));
+						})),
+				GetPage(
+						name: '/view_data',
+						page: () => ViewDataScreen(),
+						binding: BindingsBuilder(() {
+							Get.lazyPut(() => ViewDataController(Get.arguments));
+						})),
+			]
 		),
     GetPage(
       name: '/sign_up_client',
@@ -54,12 +70,6 @@ abstract class Routes {
 				Get.lazyPut(() => SignUpClientController());
 			})
     ),
-    GetPage(
-        name: '/new_operation/:clientId/hire_service',
-        page: () => HireServiceScreen(),
-        binding: BindingsBuilder(() {
-          Get.lazyPut(() => HireServiceController(Get.arguments));
-        })),
     GetPage(
       name: '/make_transaction/:clientId',
       page: () => MakeTransactionScreen(),

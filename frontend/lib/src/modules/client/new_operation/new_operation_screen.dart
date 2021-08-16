@@ -13,7 +13,6 @@ class NewOperationScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.red,
         title: Text(
           'Nova operação',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -46,7 +45,10 @@ class NewOperationScreen extends StatelessWidget {
               text: "Vizualizar dados",
               icon: Icons.remove_red_eye,
               onTap: () {
-                print('click vizualizar dados');
+                Get.toNamed(
+									'/new_operation/${(Get.arguments as Client).id}/view_data',
+									arguments: Get.arguments
+								);
               }),
           NewOperationButton(
               text: "Atualizar dados",
