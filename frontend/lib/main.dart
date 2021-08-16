@@ -14,14 +14,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Rings',
       theme: lightTheme,
-			themeMode: ThemeMode.light,
-			initialRoute: '/sign_in',
-			getPages: Routes.pages,
-			debugShowCheckedModeBanner: false,
-			initialBinding: BindingsBuilder.put(
-				() => HasuraClient(), 
-				permanent: true
-			),
+      themeMode: ThemeMode.light,
+      initialRoute: '/select_client',
+      getPages: Routes.pages,
+      debugShowCheckedModeBanner: false,
+      initialBinding:
+          BindingsBuilder.put(() => HasuraClient(), permanent: true),
     );
   }
 }
