@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rings/src/modules/client/new_operation/new_operation_controller.dart';
@@ -27,7 +26,7 @@ class NewOperationScreen extends StatelessWidget {
               child: Text(
                 "Cliente:",
                 style: TextStyle(
-                    color: Color(0xFF858585),
+                    color: Color(0xAA909090),
                     fontSize: 14,
                     fontWeight: FontWeight.w600),
               )),
