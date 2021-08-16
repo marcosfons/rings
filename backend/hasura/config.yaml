@@ -1,6 +1,6 @@
 version: 3
-endpoint: https://rings-tp.herokuapp.com
-admin_secret: VTwkuCbp66FnsjX2a3TynGH88EctGVRN
+endpoint: http://localhost:8080
+admin_secret: QYje56evpvZJgYU9vqu8wMbRaZMRR9UH
 metadata_directory: metadata
 actions:
   kind: synchronous

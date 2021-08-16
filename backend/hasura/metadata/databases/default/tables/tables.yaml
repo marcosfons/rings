@@ -1,5 +1,6 @@
 - "!include public_account.yaml"
 - "!include public_account_type.yaml"
+- "!include public_agency.yaml"
 - "!include public_client.yaml"
 - "!include public_employee.yaml"
 - "!include public_operation.yaml"

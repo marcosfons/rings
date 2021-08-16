@@ -1,0 +1,44 @@
+table:
+  name: agency
+  schema: public
+array_relationships:
+- name: accounts
+  using:
+    foreign_key_constraint_on:
+      column: agency_id
+      table:
+        name: account
+        schema: public
+- name: employees
+  using:
+    foreign_key_constraint_on:
+      column: agency_id
+      table:
+        name: employee
+        schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - name
+    - number
+    - city
+    - state
+    - created_at
+    filter: {}
+  role: anonymous
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - name
+    - number
+    - city
+    - state
+    - created_at
+    filter:
+      employees:
+        id:
+          _eq: X-Hasura-User-Id
+  role: employee

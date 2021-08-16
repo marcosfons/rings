@@ -1,0 +1,1 @@
+CREATE TABLE "public"."agency" ("id" serial NOT NULL, "name" text NOT NULL, "number" text NOT NULL, "city" text NOT NULL, "state" text NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , UNIQUE ("id"));

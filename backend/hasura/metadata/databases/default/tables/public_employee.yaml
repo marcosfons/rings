@@ -1,6 +1,10 @@
 table:
   name: employee
   schema: public
+object_relationships:
+- name: agency
+  using:
+    foreign_key_constraint_on: agency_id
 array_relationships:
 - name: operations
   using:

@@ -5,6 +5,9 @@ object_relationships:
 - name: account_type
   using:
     foreign_key_constraint_on: type
+- name: agency
+  using:
+    foreign_key_constraint_on: agency_id
 - name: client
   using:
     foreign_key_constraint_on: client_id
@@ -30,3 +33,30 @@ array_relationships:
       table:
         name: transaction
         schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - id
+    - balance
+    - number
+    - updated_at
+    - created_at
+    - client_id
+    - type
+    - agency_id
+  role: employee
+select_permissions:
+- permission:
+    columns:
+    - id
+    - balance
+    - number
+    - updated_at
+    - created_at
+    - client_id
+    - type
+    - agency_id
+    filter: {}
+  role: employee

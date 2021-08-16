@@ -8,3 +8,43 @@ object_relationships:
 - name: service_type
   using:
     foreign_key_constraint_on: type
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - id
+    - name
+    - tax
+    - hired_at
+    - canceled_at
+    - value
+    - due_at
+    - insurance
+    - type
+    - account_id
+    - created_at
+  role: employee
+select_permissions:
+- permission:
+    columns:
+    - id
+    - name
+    - tax
+    - hired_at
+    - canceled_at
+    - value
+    - due_at
+    - insurance
+    - type
+    - account_id
+    - created_at
+    filter: {}
+  role: employee
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - canceled_at
+    filter: {}
+  role: employee
