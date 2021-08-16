@@ -15,15 +15,17 @@ class CustomInput extends StatelessWidget {
   final String? hintText;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
+	final Function(String)? onChanged;
 
   const CustomInput(
-      {Key? key,
-      required this.label,
-      this.icon,
-      this.hintText,
-      this.inputFormatters,
-      this.keyboardType})
-      : super(key: key);
+		{Key? key,
+		required this.label,
+		this.icon,
+		this.hintText,
+		this.inputFormatters,
+		this.keyboardType,
+		this.onChanged
+	}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,7 @@ class CustomInput extends StatelessWidget {
         TextField(
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
+					onChanged: onChanged,
           decoration: InputDecoration(
             hintText: hintText,
             suffixIcon: Icon(icon),

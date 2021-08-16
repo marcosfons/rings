@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rings/src/core/routes/routes.dart';
+import 'package:rings/src/core/services/hasura/hasura_client.dart';
 import 'package:rings/src/core/themes/light_theme.dart';
 
 void main() {
@@ -14,8 +15,12 @@ class MyApp extends StatelessWidget {
       title: 'Rings',
       theme: lightTheme,
 			themeMode: ThemeMode.light,
-			initialRoute: '/',
+			initialRoute: '/sign_in',
 			getPages: Routes.pages,
+			initialBinding: BindingsBuilder.put(
+				() => HasuraClient(), 
+				permanent: true
+			),
     );
   }
 }

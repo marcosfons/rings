@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:rings/src/core/failures/failure.dart';
 import 'package:rings/src/core/failures/unknown_failure.dart';
+import 'package:rings/src/core/services/hasura/failures/check_constraint_failure.dart';
 import 'package:rings/src/core/services/hasura/failures/hasura_request_failure.dart';
 import 'package:rings/src/core/services/hasura/failures/invalid_query.dart';
 import 'package:rings/src/core/services/hasura/hasura_auth_interceptor.dart';
@@ -21,7 +22,6 @@ class HasuraClient {
 			final result = await _hasuraConnect.query(doc, variables: variables);
 			return right(result['data']);
 		} on InvalidRequestError catch(e) {
-			print(e.toString());
 			if (e.message == 'Invalid document') 
 				return left(const InvalidQueryFailure());
 			return left(const UnknownFailure());
@@ -39,6 +39,11 @@ class HasuraClient {
 		try {
 			final result = await _hasuraConnect.mutation(doc, variables: variables);
 			return right(result['data']);
+		} on HasuraRequestError catch(e) {
+			if (e.message.contains('Check constraint violation')) {
+				return left(CheckConstraintFailure(e.message.split(' ').last));
+			}
+			return left(HasuraRequestFailure(e.message));
 		} catch(e) {
 			return left(UnknownFailure());
 		}

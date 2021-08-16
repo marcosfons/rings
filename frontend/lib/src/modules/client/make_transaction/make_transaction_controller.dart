@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:rings/src/modules/client/models/client.dart';
+import 'package:rings/src/core/models/client.dart';
 
 class MakeTransactionController extends GetxController {
   final Client _client;

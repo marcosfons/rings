@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rings/src/core/controllers/auth_controller.dart';
 import 'package:rings/src/modules/home/home_controller.dart';
+import 'package:rings/src/shared/widgets/button_row.dart';
 
 class HomeScreen extends StatelessWidget {
 	const HomeScreen({ Key? key }) : super(key: key);
@@ -36,24 +37,38 @@ class HomeScreen extends StatelessWidget {
 						)
 					],
 				),
-			),
-			body: Obx(() {
-				if (controller.hasData) {
-					return ListView.builder(
-						itemCount: controller.data!.length,
-						itemBuilder: (BuildContext context, int index) {
-							return ListTile(
-								title: Text(controller.data![index].name, style: TextStyle(fontSize: 32),),
-								subtitle: Text(controller.data![index].id.toString())
-							);
+				actions: [
+					IconButton(
+						onPressed: () {
+							Get.delete<AuthController>(force: true);
+							Get.offNamed('/sign_in');
 						},
-					);
-				}
-				if (controller.hasError) {
-					return Center(child: Text(controller.error.toString()),);
-				}
-				return Center(child: CircularProgressIndicator(),);
-			})
+						icon: Icon(Icons.exit_to_app),						
+					)
+				],
+			),
+			body: Column(
+				crossAxisAlignment: CrossAxisAlignment.center,
+				children: [
+					Padding(
+					  padding: const EdgeInsets.only(top: 16, bottom: 8),
+					  child: ButtonRow(
+							firstButtonLabel: 'Cadastrar cliente',
+							firstOnPressed: () => Get.toNamed('/sign_up_client'),
+							secondButtonLabel: 'Operação para cliente',
+							secondOnPressed: () => Get.toNamed('/select_client'),
+						),
+					),
+					Expanded(
+						child: ListView.builder(
+							itemCount: 0,
+							itemBuilder: (ctx, index) {
+								return SizedBox();
+							},
+						),
+					)
+				],
+			)
 		);
 	}
 }

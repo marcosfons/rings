@@ -11,7 +11,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
 
-	final _passwordVisibilityNotifier = ValueNotifier<bool>(false);
+	final _passwordVisibilityNotifier = ValueNotifier<bool>(true);
 
 	@override
   void dispose() {
@@ -144,7 +144,7 @@ class _SignInScreenState extends State<SignInScreen> {
 																fontSize: 16
 															),
 														),
-														secondChild: const Center(child: CircularProgressIndicator(),),
+														secondChild: const Center(child: CircularProgressIndicator(strokeWidth: 1,),),
 														crossFadeState: controller.isLoading
 															? CrossFadeState.showSecond
 															: CrossFadeState.showFirst,

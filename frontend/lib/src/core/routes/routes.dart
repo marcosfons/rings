@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:rings/src/core/routes/middlewares/signed_in_middleware.dart';
-import 'package:rings/src/core/services/hasura/hasura_client.dart';
 import 'package:rings/src/modules/auth/sign_in/sign_in_controller.dart';
 import 'package:rings/src/modules/auth/sign_in/sign_in_screen.dart';
 import 'package:rings/src/modules/client/hire_service/hire_service_controller.dart';
@@ -11,6 +10,7 @@ import 'package:rings/src/modules/client/new_operation/new_operation_controller.
 import 'package:rings/src/modules/client/new_operation/new_operation_screen.dart';
 import 'package:rings/src/modules/client/select_client/select_client_controller.dart';
 import 'package:rings/src/modules/client/select_client/select_client_screen.dart';
+import 'package:rings/src/modules/client/sign_up_client/sign_up_client_controller.dart';
 import 'package:rings/src/modules/client/sign_up_client/sign_up_client_screen.dart';
 import 'package:rings/src/modules/home/home_controller.dart';
 import 'package:rings/src/modules/home/home_screen.dart';
@@ -19,10 +19,9 @@ abstract class Routes {
 
 	static final List<GetPage> pages = [
 		GetPage(
-			name: '/', 
+			name: '/sign_in', 
 			page: () => SignInScreen(),
 			binding: BindingsBuilder(() {
-				Get.lazyPut(() => HasuraClient());
 				Get.lazyPut(() => SignInController());
 			})
 		),
@@ -38,7 +37,6 @@ abstract class Routes {
 			name: '/select_client', 
 			page: () => SelectClientScreen(),
 			binding: BindingsBuilder(() {
-				Get.lazyPut(() => HasuraClient());
 				Get.lazyPut(() => SelectClientController());
 			})
 		),
@@ -52,6 +50,9 @@ abstract class Routes {
     GetPage(
       name: '/sign_up_client',
       page: () => SignUpClientScreen(),
+			binding: BindingsBuilder(() {
+				Get.lazyPut(() => SignUpClientController());
+			})
     ),
     GetPage(
         name: '/hire_service/:clientId',

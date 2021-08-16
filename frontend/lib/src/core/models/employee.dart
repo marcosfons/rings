@@ -1,5 +1,3 @@
-
-
 class Employee {
 
 	late final int _id;

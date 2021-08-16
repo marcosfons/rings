@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 import 'package:rings/src/core/failures/failure.dart';
 import 'package:rings/src/core/failures/unknown_failure.dart';
+import 'package:rings/src/core/models/client.dart';
 import 'package:rings/src/core/services/hasura/failures/empty_result_failure.dart';
 import 'package:rings/src/core/services/hasura/hasura_client.dart';
-import 'package:rings/src/modules/client/models/client.dart';
 
 class SelectClientService {
 

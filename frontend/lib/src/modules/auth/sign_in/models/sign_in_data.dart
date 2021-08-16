@@ -1,4 +1,4 @@
-import 'package:rings/src/modules/home/models/employee.dart';
+import 'package:rings/src/core/models/employee.dart';
 
 class SignInData {
 

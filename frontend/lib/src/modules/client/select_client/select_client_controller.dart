@@ -1,5 +1,5 @@
 import 'package:get/state_manager.dart';
-import 'package:rings/src/modules/client/models/client.dart';
+import 'package:rings/src/core/models/client.dart';
 import 'package:rings/src/modules/client/select_client/services/select_client_service.dart';
 
 class SelectClientController extends GetxController {
