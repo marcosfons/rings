@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Rings',
       theme: lightTheme,
       themeMode: ThemeMode.light,
-      initialRoute: '/select_client',
+      initialRoute: '/sign_in',
       getPages: Routes.pages,
       debugShowCheckedModeBanner: false,
       initialBinding:

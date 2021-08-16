@@ -66,6 +66,14 @@ class ViewDataScreen extends StatelessWidget {
 					ClientFieldLine(
 						fieldName: 'Telefone',
 						fieldValue: controller.client.phone,
+					),
+					ClientFieldLine(
+						fieldName: 'Profissão',
+						fieldValue: controller.client.occupation,
+					),
+					ClientFieldLine(
+						fieldName: 'Endereço',
+						fieldValue: controller.client.address,
 					)
 				],
 			),

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:rings/src/core/routes/middlewares/signed_in_middleware.dart';
+import 'package:rings/src/core/services/hasura/hasura_client.dart';
+import 'package:rings/src/modules/auth/sign_in/services/sign_in_service.dart';
 import 'package:rings/src/modules/auth/sign_in/sign_in_controller.dart';
 import 'package:rings/src/modules/auth/sign_in/sign_in_screen.dart';
 import 'package:rings/src/modules/client/hire_service/hire_service_controller.dart';
@@ -25,7 +27,7 @@ abstract class Routes {
         name: '/sign_in',
         page: () => SignInScreen(),
         binding: BindingsBuilder(() {
-          Get.lazyPut(() => SignInController());
+          Get.lazyPut(() => SignInController(SignInService(Get.find<HasuraClient>())));
         })),
     GetPage(
         name: '/home',
@@ -50,6 +52,14 @@ abstract class Routes {
           GetPage(
               name: '/hire_service',
               page: () => HireServiceScreen(),
+							children: [
+								GetPage(
+									name: '/password_check_screen',
+									page: () => PasswordCheckScreen(),
+									binding: BindingsBuilder(() {
+										Get.lazyPut(() => PasswordCheckController(Get.arguments));
+									})),
+							],
               binding: BindingsBuilder(() {
                 Get.lazyPut(() => HireServiceController(Get.arguments));
               })),
@@ -71,12 +81,6 @@ abstract class Routes {
         page: () => MakeTransactionScreen(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => MakeTransactionController(Get.arguments));
-        })),
-    GetPage(
-        name: '/password_check_screen/:clientId',
-        page: () => PasswordCheckScreen(),
-        binding: BindingsBuilder(() {
-          Get.lazyPut(() => PasswordCheckController(Get.arguments));
         })),
   ];
 }

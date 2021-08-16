@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:get/get.dart';
 import 'package:rings/src/core/failures/failure.dart';
 import 'package:rings/src/core/failures/unknown_failure.dart';
 import 'package:rings/src/core/services/hasura/hasura_client.dart';
@@ -7,11 +6,13 @@ import 'package:rings/src/modules/auth/sign_in/models/sign_in_data.dart';
 
 class SignInService {
 
-	final _hasuraClient = Get.find<HasuraClient>();
+	final HasuraClient _client;
+
+  SignInService(this._client);
 
 	Future<Either<Failure, SignInData>> signIn(String email, String password) async {
 		try {
-			final result = await _hasuraClient.query(
+			final result = await _client.query(
 				_signInQuery,
 				variables: {
 					'email': email,
@@ -22,7 +23,6 @@ class SignInService {
 			return result.fold(
 				(failure) => left(failure),
 				(data) {
-					print(data);
 					try {
 						return right(SignInData.fromJson(data['signin']));
 					} catch(e) {
@@ -31,7 +31,6 @@ class SignInService {
 				}
 			);
 		} catch(e) {
-			print(e.toString());
 			return left(const UnknownFailure());
 		}
 	}
