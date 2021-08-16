@@ -16,11 +16,8 @@ dependencies:
   get: 4.3.4
   hasura_connect: 3.0.4
   dartz: 0.10.0-nullsafety.2
-<<<<<<< HEAD:frontend/pubspec.yaml
   jwt_decoder: 2.0.1
-=======
   easy_mask: ^2.0.1
->>>>>>> signup:pubspec.yaml
 
 dev_dependencies:
   flutter_test:

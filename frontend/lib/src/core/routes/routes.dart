@@ -16,7 +16,6 @@ import 'package:rings/src/modules/home/home_controller.dart';
 import 'package:rings/src/modules/home/home_screen.dart';
 
 abstract class Routes {
-<<<<<<< HEAD:frontend/lib/src/core/routes/routes.dart
 
 	static final List<GetPage> pages = [
 		GetPage(
@@ -50,30 +49,6 @@ abstract class Routes {
 				Get.lazyPut(() => NewOperationController(Get.arguments));
 			})
 		),
-	];
-
-}
-=======
-  static final List<GetPage> pages = [
-    GetPage(name: '/', page: () => SignInScreen()),
-    GetPage(
-        name: '/home',
-        page: () => HomeScreen(),
-        binding: BindingsBuilder(() {
-          Get.lazyPut(() => HomeController());
-        })),
-    GetPage(
-        name: '/select_client',
-        page: () => SelectClientScreen(),
-        binding: BindingsBuilder(() {
-          Get.lazyPut(() => SelectClientController());
-        })),
-    GetPage(
-        name: '/new_operation/:clientId',
-        page: () => NewOperationScreen(),
-        binding: BindingsBuilder(() {
-          Get.lazyPut(() => NewOperationController(Get.arguments));
-        })),
     GetPage(
       name: '/sign_up_client',
       page: () => SignUpClientScreen(),
@@ -92,4 +67,3 @@ abstract class Routes {
       })),
   ];
 }
->>>>>>> signup:lib/src/core/routes.dart
