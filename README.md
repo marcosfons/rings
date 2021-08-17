@@ -12,10 +12,19 @@ Essa aplicação foi feita com o frontend em Flutter e o backend com Hasura (Pos
 1. [Arquitetura](#Arquitetura)
 	- [Estrutura de pastas](#estrutura-de-pastas)
 		- [Backend](#backend)
+		- [Frontend](#frontend)
 2. [Escolha de tecnologias](#escolha-de-tecnologias)
-3. [Autores](#autores)
+	- [Flutter](#flutter)
+	- [Hasura](#hasura)
+	- [Node](#node)
+	- [Docker](#docker)
+3. [Funcionalidades implementadas](#funcionalidades-implementadas)
+	- [Login](#login)
+	- [Cadastrar cliente](#cadastrar-cliente)
+	- [Selecionar cliente](#selecionar-cliente)
+4. [Autores](#autores)
 
-# Arquitetura
+## Arquitetura
 
 Foram escolhidos dois padrões arquiteturais: `Arquitetura em Camadas` e o `Padrão MVC`.
 
@@ -24,16 +33,16 @@ Foram escolhidos dois padrões arquiteturais: `Arquitetura em Camadas` e o `Padr
 - Já o `Padrão MVC` foi aplicado, exclusivamente, no frontend. O Model gerencia as estruturas de dados e cuida da lógica e regras de negócio, a View exibe as informações para o usuário, e por fim, o Controller é responsável por intermediar as requisições enviadas pela View com as respostas fornecidas pelo Model.
 
 
-## Estrutura de pastas
+### Estrutura de pastas
 
-A pasta raiz do projeto é dividido em duas pastas principais, uma para cada camada (backend + frontend)
+A pasta raiz do projeto é dividida em duas pastas principais, uma para cada camada (backend + frontend)
 
 ```
 ├── backend
 ├── frontend
 ```
 
-### Backend
+#### Backend
 
 O backend é dividido em mais duas pastas, uma para as configurações do `Hasura` e outra para um pequeno server feito em node para autenticação.
 
@@ -52,7 +61,7 @@ backend
 
 O arquivo `docker-compose.yaml` é usado para subir todo o backend usando Docker.
 
-### Frontend
+#### Frontend
 
 A pasta de frontend contém os arquivos comuns para um projeto em `Flutter`.
 
@@ -61,17 +70,17 @@ A pasta de frontend contém os arquivos comuns para um projeto em `Flutter`.
 - A pasta `test` contém os testes do projeto
 
 
-# Escolha de tecnologias
+## Escolha de tecnologias
 
 Abaixo estão listadas as tecnologias que foram usadas e porque as escolhemos.
 
 
-## Flutter
+### Flutter
 
 O Flutter é um toolkit de interface gráfica criado pela Google para o desenvolvimento de aplicações multiplataformas (Android, iOS, Web, ...). Escolhemos esse framework porque ele oferece facilidade na criação de intefaces gráficas de alto nível. Além disso, ele utiliza a linguagem Dart que é parecida com outras linguagens que já utilizamos.
 
 
-### Packages utilizados 
+#### Packages utilizados 
 
 Abaixo estão listados os packages (dependências externas) que mais foram utilizados ao longo do projeto.
 
@@ -79,11 +88,11 @@ Abaixo estão listados os packages (dependências externas) que mais foram utili
 - `hasura_connect` - Hasura client - Provê uma conexão simples com o Hasura. Usado para consultas ao banco
 - `dartz` - Functional programming - Esse package pode ser usado para implementar o paradigma funcional com Dart. Porém, nesse projeto utilizamos apenas a classe Either, isso porque ela ajuda no tratamento de falhas
 
-## Hasura
+### Hasura
 
 O Hasura é uma engine GraphQL open-source que entrega uma api amigável em GraphQL para aplicações com Postgres. Ele consegue ter um alto desempenho por manter um schema json que é usado para otimizar as requisições futuras. Além disso, ele tem um bom e fácil de usar esquema para controle de acesso às tabelas/dados. Apesar disso, ele não possui um sistema próprio de autorização
 
-## Node
+### Node
 
 Como dito acima, o Hasura não provê um sistema próprio de autorização. Por isso, utilizamos Node para criar um simples server que é responsável por encriptar/verificar senhas e criar tokens `JWT`.
 
@@ -93,9 +102,59 @@ Principais dependências:
 - `bcryptjs` - Encripta/verifica senhas
 - `express` - Framework para servidor
 - `graphql` - Requisições graphql (Hasura)
-- `jsonwebtoken ` - Gera, assina e valida tokens JWT
+- `jsonwebtoken` - Gera, assina e valida tokens JWT
 
-## Docker
+### Docker
+
+O Docker é um projeto open-source, que agiliza o processo de desenvolvimento e deploy de aplicações dentro de containers isolados. Utilizamos ele para subir e configurar o 
+ambiente do backend. Para a configuração também utilizamos o `docker-compose`
+
+
+
+## Funcionalidades implementadas
+
+Para o tempo estabelecido, não conseguimos implementar todas as funcionalidades requeridas. Abaixo estão listadas tanto as que foram implementadas quanto as que ficaram de fora dessa primeira versão.
+
+### Login
+
+O login foi criado para que um funcionário fictício previamente cadastrado pudesse entrar no sistema. E é a funcionalidade que utiliza do pequeno server em Node, que tem implementado as funções de signup e signin. O cadastro necessita de uma senha que fica salva no banco de dados encriptada (`bcryptjs`). Para o signin é verificado se a senha da tentativa corresponde a que está armazenada no banco, também precisando do email para identificar o funcionário.
+
+Caso o email utilizado para a tentativa de login não exista na base de dados é retornado um erro do backend avisando que aquele email não existe. E, caso a senha esteja errada o erro retornado é senha inválida (poderia ser melhorado, tendo em vista a segurança, a partir de um email é possível saber se o funcionário está cadastrado ou não).
+
+Para a chamada do server em Node foram feitas duas Hasura actions (signin e signup). Essas actions oferecem uma interface Graphql para uma chamada de API. Abaixo está um exemplo de cadastro e login utilizando do Graphql para puxar apenas os dados necessários.
+
+<p align="center">
+	<img src="assets/signup_mutation.png" width="210"/> <img src="assets/signin_query.png" width="210"/>
+</p>
+
+O token retornado é um token de sessão `JWT` que possui um pequeno payload com informações do funcionário, que são necessárias para a autorização das requisições após o login. Esse token também possui uma validade, no caso de apenas 1 hora. A cada nova requisição feita pelo funcionário a assinatura do token é verificada com a chave privada.
+
+No aplicativo não foi implementado um mecanismo para guardar o token entre sessões. Por isso, a cada vez que o aplicativo é aberto o usuário tem que logar novamente.
+
+
+### Cadastrar cliente
+
+Após o login o funcionário vai para a tela inicial, onde ele tem a opção de cadastrar um novo cliente. Nessa tela, ele preenche os dados do cliente e ao confirmar é feita a requisição ao banco.
+Abaixo uma screenshot do formulário. Obs.: a tela tem um scroll, por isso o campo endereço não aparece
+
+<p align="center">
+	<img src="assets/register_client.png" width="210"/>
+</p>
+
+Ao tentar fazer a requisição ao banco é retornado um erro para os seguintes casos:
+- CPF inválido: Caso o CPF não esteja no formato correto
+- CNPJ inválido: O CNPJ pode ser nulo para indicar uma pessoa física, mas será inválido caso o seu texto não esteja no formato correto
+- Dados pessoais nulos
+
+Após confirmar e com os dados corretos o cliente será cadastrado.
+
+
+
+
+### Selecionar cliente
+
+Após o login 
+
 
 
 
@@ -103,6 +162,6 @@ Principais dependências:
 
 ## Autores
 
-CarlosMito - @CarlosMito
-Marcos Fonseca - @marcosfons
-Vitor Lara - @vitorsvl
+- [Carlos Mito - @CarlosMito](https://github.com/CarlosMito)
+- [Marcos Fonseca - @marcosfons](https://github.com/marcosfons)
+- [Vitor Lara - @vitorsvl](https://github.com/vitorsvl)
