@@ -23,11 +23,6 @@ class SignUpClientScreen extends StatelessWidget {
 			Field('Profissão', 'occupation'),
 			Field('Endereço', 'address'),
 		];
-		
-		//  {
-		// 	'address_receipt_image': '',
-		// 	'profit_receipt_image': ''
-		// }
 
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +35,16 @@ class SignUpClientScreen extends StatelessWidget {
         children: [
 					Obx(() {
 						if (controller.hasError) {
-							return Text(controller.error!);
+							return Padding(
+							  padding: const EdgeInsets.only(top: 16, bottom: 10),
+							  child: Text(
+							  	controller.error!,
+							  	style: TextStyle(
+							  		color: Colors.red,
+							  		fontSize: 18
+							  	),
+							  ),
+							);
 						}
 						return SizedBox();
 					}),

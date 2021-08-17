@@ -23,7 +23,6 @@ class Service {
 		_value = json['value'];
 		_insurance = json['insurance'];
 		_serviceType = (json['type'] as String).serviceFromName;
-		print(_serviceType);
 
 		_accountId = json['account_id'];
 		_dueAt = DateTime.tryParse(json['due_at'] ?? '')?.toLocal();

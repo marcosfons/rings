@@ -74,7 +74,29 @@ class ViewDataScreen extends StatelessWidget {
 					ClientFieldLine(
 						fieldName: 'Endereço',
 						fieldValue: controller.client.address,
-					)
+					),
+
+					const SizedBox(height: 20,),
+					Text(
+						'Serviços contratados',
+						style: TextStyle(
+							fontSize: 18,
+							fontWeight: FontWeight.bold
+						),
+					),
+
+					...controller.client.accounts.first.services
+							.where((service) => service.isHired)
+							.map((service) {
+								return Padding(
+								  padding: const EdgeInsets.only(top: 8.0),
+								  child: Text(
+								  	'${service.name} contratado',
+								  	style: TextStyle(fontSize: 16),
+								  ),
+								);
+							})
+							.toList()
 				],
 			),
 		);

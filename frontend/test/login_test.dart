@@ -46,12 +46,12 @@ void main() {
 		expect(result, Left<Failure, SignInData>(const InvalidPasswordFailure()));
 	});
 
-	test('SignIn with a small invalid password', () async {
-		signInController.email = 'teste@teste.com';
-		signInController.password = '1234';
+	// test('SignIn with a small invalid password', () async {
+	// 	signInController.email = 'teste@teste.com';
+	// 	signInController.password = '1234';
 
-		final result = await signInController.signIn();
-		expect(result.isRight(), true);
-	});
+	// 	final result = await signInController.signIn();
+	// 	expect(result.isRight(), true);
+	// });
 
 }

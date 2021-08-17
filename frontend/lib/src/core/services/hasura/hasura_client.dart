@@ -40,14 +40,11 @@ class HasuraClient {
 			final result = await _hasuraConnect.mutation(doc, variables: variables);
 			return right(result['data']);
 		} on HasuraRequestError catch(e) {
-			print(e.toString());
 			if (e.message.contains('Check constraint violation')) {
 				return left(CheckConstraintFailure(e.message.split(' ').last));
 			}
-			print(e.message);
 			return left(HasuraRequestFailure(e.message));
 		} catch(e) {
-			print(e.toString());
 			return left(UnknownFailure());
 		}
 	}

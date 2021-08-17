@@ -51,7 +51,6 @@ class SignUpClientService {
 				(data) => right(Client.fromJson(data['insert_client_one']))
 			);
 		} catch(e) {
-			print(e.toString());
 			return left(UnknownFailure());
 		}
 	}

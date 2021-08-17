@@ -32,19 +32,21 @@ abstract class Routes {
     GetPage(
         name: '/home',
         page: () => HomeScreen(),
-        middlewares: [SignedInMiddleware()],
+        middlewares: [ SignedInMiddleware() ],
         binding: BindingsBuilder(() {
           Get.lazyPut(() => HomeController());
         })),
     GetPage(
         name: '/select_client',
         page: () => SelectClientScreen(),
+				middlewares: [ SignedInMiddleware() ],
         binding: BindingsBuilder(() {
           Get.lazyPut(() => SelectClientController());
         })),
     GetPage(
         name: '/new_operation/:clientId',
         page: () => NewOperationScreen(),
+				middlewares: [ SignedInMiddleware() ],
         binding: BindingsBuilder(() {
           Get.lazyPut(() => NewOperationController(Get.arguments));
         }),
@@ -52,10 +54,12 @@ abstract class Routes {
           GetPage(
               name: '/hire_service',
               page: () => HireServiceScreen(),
+							middlewares: [ SignedInMiddleware() ],
 							children: [
 								GetPage(
 									name: '/password_check_screen',
 									page: () => PasswordCheckScreen(),
+									middlewares: [ SignedInMiddleware() ],
 									binding: BindingsBuilder(() {
 										Get.lazyPut(() => PasswordCheckController(Get.arguments));
 									})),
@@ -73,12 +77,14 @@ abstract class Routes {
     GetPage(
         name: '/sign_up_client',
         page: () => SignUpClientScreen(),
+				middlewares: [ SignedInMiddleware() ],
         binding: BindingsBuilder(() {
           Get.lazyPut(() => SignUpClientController());
         })),
     GetPage(
         name: '/make_transaction/:clientId',
         page: () => MakeTransactionScreen(),
+				middlewares: [ SignedInMiddleware() ],
         binding: BindingsBuilder(() {
           Get.lazyPut(() => MakeTransactionController(Get.arguments));
         })),

@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 import 'package:rings/src/core/controllers/auth_controller.dart';
 import 'package:rings/src/core/failures/failure.dart';
-import 'package:rings/src/core/services/hasura/hasura_client.dart';
 import 'package:rings/src/modules/auth/sign_in/failures/invalid_email.dart';
 import 'package:rings/src/modules/auth/sign_in/failures/invalid_password.dart';
 import 'package:rings/src/modules/auth/sign_in/models/sign_in_data.dart';
@@ -20,7 +19,6 @@ class SignInController extends GetxController {
 	final _loading = Rx<bool>(false);
 	final _error = Rx<String?>(null);
 
-
 	bool get isLoading => _loading.value;
 	bool get hasError => _error.value != null;
 	String? get error => _error.value;
@@ -34,6 +32,8 @@ class SignInController extends GetxController {
 
 		final validateFailure = _validateFields(_email, _password);
 		if (validateFailure != null) {
+			_error.value = validateFailure.message;
+			_loading.value = false;
 			return left(validateFailure);
 		}
 

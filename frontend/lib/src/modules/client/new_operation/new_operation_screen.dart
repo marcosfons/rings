@@ -54,13 +54,11 @@ class NewOperationScreen extends StatelessWidget {
               text: "Atualizar dados",
               icon: Icons.edit,
               onTap: () {
-                print('click Atualizar dados');
               }),
           NewOperationButton(
               text: "Fazer Transação",
               icon: Icons.attach_money,
               onTap: () {
-                print('click Fazer transação');
               }),
           NewOperationButton(
               text: "Contratar serviço",

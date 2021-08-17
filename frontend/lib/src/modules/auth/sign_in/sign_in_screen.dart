@@ -132,23 +132,16 @@ class _SignInScreenState extends State<SignInScreen> {
 					  	        child: Obx(() => ElevatedButton(
 												onPressed: controller.isLoading
 													? null
-													: controller.signIn,
+													: () => controller.signIn(),
 												child: Padding(
 													padding: const EdgeInsets.symmetric(
 														vertical: 14
 													),
-													child: AnimatedCrossFade(
-														firstChild: Text(
-															'Entrar',
-															style: TextStyle(
-																fontSize: 16
-															),
+													child: Text(
+														'Entrar',
+														style: TextStyle(
+															fontSize: 16
 														),
-														secondChild: const Center(child: CircularProgressIndicator(strokeWidth: 1,),),
-														crossFadeState: controller.isLoading
-															? CrossFadeState.showSecond
-															: CrossFadeState.showFirst,
-														duration: Duration(milliseconds: 5),
 													),
 												)),
 											),
