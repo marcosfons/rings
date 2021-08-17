@@ -4,7 +4,7 @@ Rings é um banco fictício para um trabalho da disciplina de Introdução a Eng
 Essa aplicação foi feita com o frontend em Flutter e o backend com Hasura (Postgres) + nodejs (auth)
 
 <p align="center">
-	<img src="assets/login_screen.png" width="290"/> <img src="assets/view_data_screen.png" width="290"/>
+	<img src="assets/login_screen.png" width="230"/> <img src="assets/view_data_screen.png" width="230"/>
 </p>
 
 ## Conteúdos
@@ -22,6 +22,8 @@ Essa aplicação foi feita com o frontend em Flutter e o backend com Hasura (Pos
 	- [Login](#login)
 	- [Cadastrar cliente](#cadastrar-cliente)
 	- [Selecionar cliente](#selecionar-cliente)
+	- [Visualizar dados](#visualizar-dados)
+	- [Contratar serviço](#contratar-serviço)
 4. [Autores](#autores)
 
 ## Arquitetura
@@ -153,8 +155,39 @@ Após confirmar e com os dados corretos o cliente será cadastrado.
 
 ### Selecionar cliente
 
-Após o login 
+Na tela inicial o funcionário também pode escolher realizar uma nova operação para o cliente, para isso ele é enviado à tela de selecionar cliente. 
+É feita uma requisição ao banco para puxar todos os clientes e seus dados, após isso o funcionário pode pesquisar o cliente desejado por nome, apelido, CPF ou CNPJ.
 
+<p align="center">
+	<img src="assets/select_client.png" width="210"/> <img src="assets/select_client_frodo.png" width="210"/>
+</p>
+
+Caso ocorra algum erro na requisição ou não tenha nenhum cliente cadastrado, é mostrado um botão com a opção de tentar novamente.
+
+Ao clicar em algum dos clientes, o funcionário é enviado para a tela de nova operação, onde ele escolhe qual operação ele deseja realizar.
+
+
+
+### Visualizar dados
+
+Essa é uma operação que o funcionário pode fazer após selecionar o cliente. Nessa tela são mostrados os principais dados do cliente, dentre eles os dados da conta, dados pessoais e os serviços contratados
+
+<p align="center">
+	<img src="assets/view_data_frodo.png" width="210"/> <img src="assets/view_data_legolas.png" width="210"/>
+</p>
+
+
+
+### Contratar serviço
+
+Essa é uma operação que o funcionário pode fazer após selecionar o cliente. 
+Nessa tela são listados todos os serviços do banco, podendo realizar uma busca por nome. 
+À direita de cada item está um marcador indicando se aquele serviço está contratado ou não. 
+Ao clicar em algum dos itens será feita uma requisição para contratar/descontratar o serviço.
+
+<p align="center">
+	<img src="assets/hire_service_frodo.png" width="210"/> <img src="assets/hire_service_frodo_recharge.png" width="210"/>
+</p>
 
 
 
