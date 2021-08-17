@@ -13,11 +13,7 @@ Essa aplicação foi feita com o frontend em Flutter e o backend com Hasura (Pos
 	- [Estrutura de pastas](#estrutura-de-pastas)
 		- [Backend](#backend)
 2. [Escolha de tecnologias](#escolha-de-tecnologias)
-
-6. [Autores](#autores)
-
-
-<br/>
+3. [Autores](#autores)
 
 # Arquitetura
 
@@ -64,18 +60,16 @@ A pasta de frontend contém os arquivos comuns para um projeto em `Flutter`.
 - A pasta `assets` contém imagens usadas no projeto
 - A pasta `test` contém os testes do projeto
 
-<br/>
-
 
 # Escolha de tecnologias
 
 Abaixo estão listadas as tecnologias que foram usadas e porque as escolhemos.
 
-<br>
 
 ## Flutter
 
 O Flutter é um toolkit de interface gráfica criado pela Google para o desenvolvimento de aplicações multiplataformas (Android, iOS, Web, ...). Escolhemos esse framework porque ele oferece facilidade na criação de intefaces gráficas de alto nível. Além disso, ele utiliza a linguagem Dart que é parecida com outras linguagens que já utilizamos.
+
 
 ### Packages utilizados 
 
@@ -85,17 +79,9 @@ Abaixo estão listados os packages (dependências externas) que mais foram utili
 - `hasura_connect` - Hasura client - Provê uma conexão simples com o Hasura. Usado para consultas ao banco
 - `dartz` - Functional programming - Esse package pode ser usado para implementar o paradigma funcional com Dart. Porém, nesse projeto utilizamos apenas a classe Either, isso porque ela ajuda no tratamento de falhas
 
-
-
-<br>
-
 ## Hasura
 
 O Hasura é uma engine GraphQL open-source que entrega uma api amigável em GraphQL para aplicações com Postgres. Ele consegue ter um alto desempenho por manter um schema json que é usado para otimizar as requisições futuras. Além disso, ele tem um bom e fácil de usar esquema para controle de acesso às tabelas/dados. Apesar disso, ele não possui um sistema próprio de autorização
-
-
-
-<br>
 
 ## Node
 
@@ -109,10 +95,6 @@ Principais dependências:
 - `graphql` - Requisições graphql (Hasura)
 - `jsonwebtoken ` - Gera, assina e valida tokens JWT
 
-
-
-<br>
-
 ## Docker
 
 
@@ -122,7 +104,5 @@ Principais dependências:
 ## Autores
 
 CarlosMito - @CarlosMito
-
 Marcos Fonseca - @marcosfons
-
 Vitor Lara - @vitorsvl
