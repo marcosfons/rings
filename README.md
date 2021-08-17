@@ -24,19 +24,26 @@ Essa aplicação foi feita com o frontend em Flutter e o backend com Hasura (Pos
 	- [Selecionar cliente](#selecionar-cliente)
 	- [Visualizar dados](#visualizar-dados)
 	- [Contratar serviço](#contratar-serviço)
-4. [Autores](#autores)
+4. [Testes](#testes)
+	- [Estrutura dos testes](#estrutura-dos-testes)
+	- [SignIn](#signin)
+	- [Seleção de clientes](#seleção-de-clientes)
+5. [Diagrama de classes](#diagrama-de-classes)
+6. [Autores](#autores)
 
 ## Arquitetura
 
 Foram escolhidos dois padrões arquiteturais: `Arquitetura em Camadas` e o `Padrão MVC`.
 
+<p align="center">
+	<img src="assets/architecture_diagram.jpeg" width="430"/>
+</p>
+
 - A `Arquitetura em Camadas` foi utilizada para separar o frontend, que é responsável por exibir as informações na tela e interagir com o usuário, do backend, que cuida da manipulação e validação correta dos dados emitidos e recebidos do banco de dados. 
 
 - Já o `Padrão MVC` foi aplicado, exclusivamente, no frontend. O Model gerencia as estruturas de dados e cuida da lógica e regras de negócio, a View exibe as informações para o usuário, e por fim, o Controller é responsável por intermediar as requisições enviadas pela View com as respostas fornecidas pelo Model.
 
-<p align="center">
-	<img src="assets/architecture_diagram.jpeg" width="430"/>
-</p>
+
 
 ### Estrutura de pastas
 
@@ -92,6 +99,8 @@ Abaixo estão listados os packages (dependências externas) que mais foram utili
 - `Getx` - Flutter microframework - Agiliza o desenvolvimento, provendo gerenciadores de estado, rotas nomeadas, injeção de dependência, ...
 - `hasura_connect` - Hasura client - Provê uma conexão simples com o Hasura. Usado para consultas ao banco
 - `dartz` - Functional programming - Esse package pode ser usado para implementar o paradigma funcional com Dart. Porém, nesse projeto utilizamos apenas a classe Either, isso porque ela ajuda no tratamento de falhas
+- `flutter_test` - Package padrão do Flutter para testes
+- `mocktail` - Package para mockar dados para os testes
 
 ### Hasura
 
@@ -191,6 +200,82 @@ Ao clicar em algum dos itens será feita uma requisição para contratar/descont
 <p align="center">
 	<img src="assets/hire_service_frodo.png" width="210"/> <img src="assets/hire_service_frodo_recharge.png" width="210"/>
 </p>
+
+
+## Testes
+
+Realizamos testes de unidade, que consistem na validação de um módulo individualmente, e testes de integração, que como o próprio nome sugere testam a integração entre os módulos.
+
+
+### Estrutura dos testes
+
+No Flutter é recomendável que os testes sejam colocados na pasta `test`, usem a mesma estrutura de pastas do projeto normal e sigam a seguinte nomenclatura `filename_test.dart`. Exemplo para o teste de signIn:
+
+```
+.
+├── lib
+│   └── src
+│       ├── modules
+│       │   ├── auth
+│       │   │   └── sign_in
+│       │   │       ├── services
+│       │   │       │   └── sign_in_service.dart
+│       │   │       ├── sign_in_controller.dart
+|		...
+├── test
+│   └── src
+│       └── modules
+│           ├── auth
+│           │   └── sign_in
+│           │       ├── services
+│           │       │   └── sign_in_service_test.dart
+│           │       └── sign_in_controller_test.dart
+|		...
+```
+
+Para os testes foi utilizado o package `Mocktail` para realizar o mock de alguns dados.
+
+
+### SignIn
+
+Na seção de signIn, fizemos testes de unidade para os seguintes casos:
+
+- E-mail e senha vazios;
+- E-mail inválido;
+- Senha vazia;
+- Senha muito pequena.
+- Erros/falhas
+
+Testes e seus resultados:
+
+<img src="assets/sign_in_tests.png" width="420"/>
+
+
+
+### Seleção de clientes
+
+A outra seção testada foi a de seleção de clientes, para os seguintes casos
+
+- Retornou uma lista vazia, espera-se uma falha;
+- Retornou um erro, espera-se uma falha;
+- Retornou uma falha, espera-se uma falha;
+- Retornou um cliente sem CPF, espera-se uma falha;
+- Retornou um cliente válido, espera-se a seleção de tal cliente.
+
+Testes e seus resultados
+
+<img src="assets/select_client_tests.png" width="420"/>
+
+
+
+## Diagrama de classes
+
+Para a modelagem de classes e a modelagem das tabelas no banco de dados, seguimos o seguinte diagrama de casos de uso:
+
+<p align="center">
+	<img src="assets/class_diagram.jpg" width="580"/>
+</p>
+
 
 
 
