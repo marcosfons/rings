@@ -34,6 +34,9 @@ Foram escolhidos dois padrões arquiteturais: `Arquitetura em Camadas` e o `Padr
 
 - Já o `Padrão MVC` foi aplicado, exclusivamente, no frontend. O Model gerencia as estruturas de dados e cuida da lógica e regras de negócio, a View exibe as informações para o usuário, e por fim, o Controller é responsável por intermediar as requisições enviadas pela View com as respostas fornecidas pelo Model.
 
+<p align="center">
+	<img src="assets/architecture_diagram.jpeg" width="430"/>
+</p>
 
 ### Estrutura de pastas
 
