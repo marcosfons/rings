@@ -1,4 +1,8 @@
-enum ServiceType { insurance, loan, autoPhoneRecharge }
+enum ServiceType { 
+	insurance, 
+	loan, 
+	autoPhoneRecharge 
+}
 
 extension ServiceTypeExtension on ServiceType {
   String get name {

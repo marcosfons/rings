@@ -14,6 +14,7 @@ import 'package:rings/src/modules/client/password_check/password_check_controlle
 import 'package:rings/src/modules/client/password_check/password_check_screen.dart';
 import 'package:rings/src/modules/client/select_client/select_client_controller.dart';
 import 'package:rings/src/modules/client/select_client/select_client_screen.dart';
+import 'package:rings/src/modules/client/select_client/services/select_client_service.dart';
 import 'package:rings/src/modules/client/sign_up_client/sign_up_client_controller.dart';
 import 'package:rings/src/modules/client/sign_up_client/sign_up_client_screen.dart';
 import 'package:rings/src/modules/client/view_data/view_data_controller.dart';
@@ -41,7 +42,7 @@ abstract class Routes {
         page: () => SelectClientScreen(),
 				middlewares: [ SignedInMiddleware() ],
         binding: BindingsBuilder(() {
-          Get.lazyPut(() => SelectClientController());
+          Get.lazyPut(() => SelectClientController(SelectClientService(Get.find<HasuraClient>())));
         })),
     GetPage(
         name: '/new_operation/:clientId',

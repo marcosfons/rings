@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:get/get.dart';
 import 'package:rings/src/core/failures/failure.dart';
 import 'package:rings/src/core/failures/unknown_failure.dart';
 import 'package:rings/src/core/models/client.dart';
@@ -8,7 +7,9 @@ import 'package:rings/src/core/services/hasura/hasura_client.dart';
 
 class SelectClientService {
 
-	final _hasuraClient = Get.find<HasuraClient>();
+	final HasuraClient _hasuraClient;
+
+  SelectClientService(this._hasuraClient);
 
 	Future<Either<Failure, List<Client>>> getClients() async {
 		try {

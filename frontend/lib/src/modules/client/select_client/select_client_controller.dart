@@ -4,7 +4,9 @@ import 'package:rings/src/modules/client/select_client/services/select_client_se
 
 class SelectClientController extends GetxController {
 
-	final _selectClientsService = SelectClientService();
+	final SelectClientService _selectClientsService;
+	
+  SelectClientController(this._selectClientsService);
 
 	final _clients = Rx<List<Client>?>(null);
 	final _filteredClients = Rx<List<Client>?>(null);
@@ -15,7 +17,6 @@ class SelectClientController extends GetxController {
 	bool get hasData => _clients.value != null;
 
 	String? get error => _error.value;
-	List<Client>? get clients => _clients.value;
 	List<Client>? get filteredClients => _filteredClients.value;
 
 	@override
