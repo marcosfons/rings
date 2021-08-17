@@ -7,6 +7,8 @@ Essa aplicação foi feita com o frontend em Flutter e o backend com Hasura (Pos
 	<img src="assets/login_screen.png" width="230"/> <img src="assets/view_data_screen.png" width="230"/>
 </p>
 
+> **_LINK:_** Esse projeto está disponível no Github nesse [link](https://github.com/marcosfons/rings). 
+
 ## Conteúdos
 
 1. [Arquitetura](#Arquitetura)
@@ -275,7 +277,6 @@ Para a modelagem de classes e a modelagem das tabelas no banco de dados, seguimo
 <p align="center">
 	<img src="assets/class_diagram.jpg" width="670"/>
 </p>
-
 
 
 
