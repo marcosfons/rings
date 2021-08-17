@@ -26,13 +26,11 @@ class SignInService {
 					try {
 						return right(SignInData.fromJson(data['signin']));
 					} catch(e) {
-						print(e.toString());
 						return left(const UnknownFailure());
 					}
 				}
 			);
 		} catch(e) {
-			print(e.toString());
 			return left(const UnknownFailure());
 		}
 	}
