@@ -273,7 +273,7 @@ Testes e seus resultados
 Para a modelagem de classes e a modelagem das tabelas no banco de dados, seguimos o seguinte diagrama de casos de uso:
 
 <p align="center">
-	<img src="assets/class_diagram.jpg" width="580"/>
+	<img src="assets/class_diagram.jpg" width="670"/>
 </p>
 
 
